@@ -5,12 +5,12 @@ import 'rxjs/add/operator/map';
 
 @Injectable()
 export class StartService {
-  private os: String[];
+  private os: string[];
   constructor(private http: Http) {
 
   }
 
-  getOperatingSystems(): Observable<String[]>{
+  getOperatingSystems(): Observable<string[]>{
     console.log("In OS fetching backend");
     return this.http.get('/api/os', JSON.stringify({}))
     .map((response: Response) => {

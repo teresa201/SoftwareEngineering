@@ -9,8 +9,8 @@ import { ResponseComponent } from '../response/response.component';
 const appRoutes: Routes = [
   { path: '', redirectTo: '/home', pathMatch: 'full'},
   { path: 'home', component: HomeComponent},
-  { path: 'scenario', component: ScenarioComponent },
-  { path: 'response', component: ResponseComponent },
+  { path: 'scenario/:sid', component: ScenarioComponent },
+  { path: 'response/:rid', component: ResponseComponent },
 
 
 

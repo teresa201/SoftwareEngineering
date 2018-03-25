@@ -1,13 +1,23 @@
-<p>
-  home works!
-</p>
+
 <div class = "container">
 
     <h1 class = "text-center"> CyberSim</h1>
-    <h2> Input Technologies: </h2>
-    
-    <select>
-      <option *ngFor= "let o of os" >{{o}}</option>
-    </select>
+    <form [formGroup] = "form" (ngSubmit) = "onSubmit()">
+    <p> Input Technology: </p>
 
+    <select formControlName = "osChosen" ngModel>
+      <option *ngFor= "let o of osOptions" [ngValue] = "o" >{{o}}</option>
+    </select>
+    <button
+                type="submit"
+                class="btn btn-dark btn-block mt-4">Sumbit Technology</button>
+  </form>
+
+  <button
+              type="submit"
+              class="btn btn-dark btn-block mt-4"
+              [disabled] = "!isReady()"
+              (click) = "onGenerate()">Generate Scenario</button>
+<!--<a routerLink = "scenario"
+routerLinkActive = "active" class="btn btn-primary float-right">Checkout</a>-->
 </div>

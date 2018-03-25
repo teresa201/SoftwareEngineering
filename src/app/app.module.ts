@@ -13,6 +13,8 @@ import { ResponseComponent } from './response/response.component';
 import { NavbarComponent } from './navbar/navbar.component';
 import { fakeBackendProvider } from './backend/fake-backend';
 import { StartService } from './services/start.service';
+import { GeneratorService } from './services/generator-service'
+import { ResponseService } from './services/response.service';
 import { BaseRequestOptions } from '@angular/http';
 
 
@@ -35,6 +37,8 @@ import { BaseRequestOptions } from '@angular/http';
     fakeBackendProvider,
     MockBackend,
     StartService,
+    GeneratorService,
+    ResponseService,
     BaseRequestOptions,
   ],
   bootstrap: [AppComponent]
