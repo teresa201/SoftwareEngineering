@@ -5,7 +5,7 @@ import { RoutingModule } from './modules/routing.module';
 import { MockBackend, MockConnection } from '@angular/http/testing';
 import { HttpModule } from '@angular/http';
 import { FormGroup,FormsModule, FormBuilder, Validators, ReactiveFormsModule } from '@angular/forms';
-
+import { MultiselectDropdownModule } from 'angular-2-dropdown-multiselect';
 import { AppComponent } from './app.component';
 import { HomeComponent } from './home/home.component';
 import { ScenarioComponent } from './scenario/scenario.component';
@@ -31,7 +31,8 @@ import { BaseRequestOptions } from '@angular/http';
     RoutingModule,
     HttpModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    MultiselectDropdownModule 
   ],
   providers: [
     fakeBackendProvider,

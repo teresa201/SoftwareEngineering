@@ -2,7 +2,7 @@ import { Http, BaseRequestOptions, Response, ResponseOptions, RequestMethod } fr
 import { MockBackend, MockConnection } from '@angular/http/testing';
 import { Scenario } from '../scenario';
 import { Responses } from '../response';
-import { osDB } from './os-db';
+import { serviceDB } from './services-db';
 import { scDB } from './scenario-db';
 import { rDB } from './response-db';
 
@@ -10,22 +10,22 @@ export function fakeBackendFactory(backend: MockBackend, options: BaseRequestOpt
     // configure fake backend
     backend.connections.subscribe((connection: MockConnection) => {
 
-        let operatingSystems: String[] = JSON.parse(localStorage.getItem('operatingSystems')) || osDB;
+        let services: String[] = JSON.parse(localStorage.getItem('services')) || serviceDB;
         let scenarios: Scenario[] = JSON.parse(localStorage.getItem('scenarios')) || scDB;
         let responses: Responses[] = JSON.parse(localStorage.getItem('responses')) || rDB;
         // wrap in timeout to simulate server api call
         setTimeout(() => {
 
-          // API: To get all OS
-            if (connection.request.url.endsWith('/api/os') && connection.request.method === RequestMethod.Get) {
-                if(!osDB){
+          // API: To get all Services
+            if (connection.request.url.endsWith('/api/services') && connection.request.method === RequestMethod.Get) {
+                if(!serviceDB){
                   console.log("Bad");
                     connection.mockRespond(new Response(
                         new ResponseOptions({ status: 400 })
                     ));
                 } else {
                     connection.mockRespond(new Response(
-                        new ResponseOptions({ status: 200, body: {String: operatingSystems}})
+                        new ResponseOptions({ status: 200, body: {String: services}})
                     ));
                 }
             }

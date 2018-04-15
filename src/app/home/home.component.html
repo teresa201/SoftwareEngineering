@@ -2,22 +2,17 @@
 <div class = "container">
 
     <h1 class = "text-center"> CyberSim</h1>
-    <form [formGroup] = "form" (ngSubmit) = "onSubmit()">
-    <p> Input Technology: </p>
+    <form *ngIf = "myOptionsF" [formGroup] = "form" (ngSubmit) = "onSubmit()">
+    <p> Input Business Service(s): </p>
 
-    <select formControlName = "osChosen" ngModel>
-      <option *ngFor= "let o of osOptions" [ngValue] = "o" >{{o}}</option>
-    </select>
+    <!--<select multiple formControlName = "sChosen" ngModel>
+      <option *ngFor= "let s of services" [ngValue] = "s" >{{s}}</option>
+    </select>-->
+    <ss-multiselect-dropdown [options]="myOptions"
+                  formControlName="sChosen">
+    </ss-multiselect-dropdown>
     <button
                 type="submit"
-                class="btn btn-dark btn-block mt-4">Sumbit Technology</button>
+                class="btn btn-dark btn-block mt-4">Generate Scenario</button>
   </form>
-
-  <button
-              type="submit"
-              class="btn btn-dark btn-block mt-4"
-              [disabled] = "!isReady()"
-              (click) = "onGenerate()">Generate Scenario</button>
-<!--<a routerLink = "scenario"
-routerLinkActive = "active" class="btn btn-primary float-right">Checkout</a>-->
 </div>

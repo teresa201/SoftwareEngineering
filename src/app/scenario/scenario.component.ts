@@ -23,20 +23,20 @@ export class ScenarioComponent implements OnInit {
   private nextId = 1;
 
   ngOnInit() {
-    this.route.params
+    /*this.route.params
       .subscribe(
         (params: Params) => {
           this.scenarioId = +params['sid'];
-          console.log(this.scenarioId );
+          console.log(this.scenarioId );*/
 
-        }
-      );
-      this.generatorService.getScenario(this.scenarioId)
+      
+
+      /*this.generatorService.getScenario(this.scenarioId)
               .subscribe(result => {
                     //console.log(result);
                     this.scenario = result;
                     console.log(this.scenario);
-              });
+              });*/
   this.initForm();
 
   }
