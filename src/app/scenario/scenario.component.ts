@@ -5,7 +5,7 @@ import { Responses } from '../response';
 import { GeneratorService } from '../services/generator-service';
 import { ResponseService } from '../services/response.service';
 import { NgForm,FormControl, NgModel, FormGroup, FormBuilder,Validators } from '@angular/forms';
-
+import { Next } from '../nextSteps';
 @Component({
   selector: 'app-scenario',
   templateUrl: './scenario.component.html',
@@ -18,42 +18,44 @@ export class ScenarioComponent implements OnInit {
   private responseService: ResponseService) { }
 
   private scenarioId : number;
-  private scenario: Scenario;
+  private scen: Scenario;
+  drop: boolean = false;
+  question: string ;
+  options: String[];
+  scenario: string;
   form: FormGroup;
-  private nextId = 1;
+  finished: boolean;
+  private next: Next;
+
 
   ngOnInit() {
-    /*this.route.params
-      .subscribe(
-        (params: Params) => {
-          this.scenarioId = +params['sid'];
-          console.log(this.scenarioId );*/
-
-      
-
-      /*this.generatorService.getScenario(this.scenarioId)
+  
+    console.log("Iin Scenario");
+      this.generatorService.getScenario()
               .subscribe(result => {
                     //console.log(result);
-                    this.scenario = result;
-                    console.log(this.scenario);
-              });*/
+                    this.scen = result;
+                    if(this.scen.options.length > 0){
+                      this.drop = true;
+                    }
+                    this.scenario = this.scen.s;
+                    this.question = this.scen.question;
+                    this.options = this.scen.options;
+                    this.finished = this.scen.finished;
+                    console.log(this.scen);
+              });
   this.initForm();
 
   }
 
   initForm(){
-    let iD = '';
-    let cE = '';
-    let rec = '';
-    let fU = '';
 
-
+   let dDwn: string[];
+   let quest: string = "";
 
     this.form = new FormGroup({
-      'iD': new FormControl(iD, Validators.required),
-      'cE': new FormControl(cE, Validators.required),
-      'rec': new FormControl(rec, Validators.required),
-      'fU': new FormControl(fU, Validators.required),
+      'dDown': new FormControl(dDwn),
+      'quest': new FormControl(quest, Validators.required),
     });
   }
 
@@ -61,24 +63,33 @@ export class ScenarioComponent implements OnInit {
     console.log(this.form.value);
 
     const newResponse = {
-      scnID: this.scenarioId,
-      responseId: this.nextId,
-      iD: this.form.value['iD'],
-      cE: this.form.value['cE'],
-      recover: this.form.value['rec'],
-      fU: this.form.value['fU'],
+      dDwn: this.form.value['dDown'],
+      question: this.form.value['quest']
 
     }
-      //console.log(newListing);
-      this.nextId++;
+
       this.responseService.addResponse(newResponse);
+    if(this.finished){
       this.form.reset();
-      let pre = this.nextId -1;
-      this.router.navigateByUrl('/response/' + pre );
-
-    //  this.router.navigateByUrl('');
-    //  this.router.navigateByUrl('/dash/' + this.projectId);
-
+      this.router.navigateByUrl('response');
     }
+    else{
+      this.drop = false;
+      this.generatorService.getNext()
+              .subscribe(result => {
+                    console.log(result);
+                    this.next = result;
+                    if(this.next.options.length > 0){
+                      this.drop = true;
+                    }
+                    this.question = this.next.question;
+                    this.options = this.next.options;
+                    this.finished = this.next.finished;
+
+              });
+    this.form.reset();
+    }
+
+  }
 
 }

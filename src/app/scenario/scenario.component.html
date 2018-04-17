@@ -1,72 +1,37 @@
 
-<!--<h1>Scenario: <h1>
-  <h3> You must defend against</h3>
-  <h4> {{scenario.first}},  {{scenario.second}},  {{scenario.third}}</h4>-->
+
 <br>
 <br>
   <div class="card">
     <div class="card-body">
       <h5 class="card-title">Scenario</h5>
-      <h6 class="card-subtitle mb-2 text-muted">You must defend against</h6>
-      <p class="card-text">{{scenario.first}},  {{scenario.second}},  {{scenario.third}}</p>
+      <p *ngIf = "scen" class="card-text">  {{scenario}} </p>
     </div>
   </div>
 <br>
 <br>
 <div class = "container" >
       <h5 >Response</h5>
-      <h6 >Record your response to this scenario</h6>
   </div>
 
   <div class = "container">
 <div class = "row">
   <div class = "col-md-12">
-    <form [formGroup] = "form" (ngSubmit) = "onSubmit()">
+    <form *ngIf = "scen" [formGroup] = "form" (ngSubmit) = "onSubmit()">
       <div class = "row">
       <div class = "col-md-12">
+        <div *ngIf = "drop" class = "container">
+        What shoud you do?
+        <select formControlName = "dDown" ngModel>
+          <option *ngFor= "let o of options" [ngValue] = "o" >{{o}}</option>
+        </select>
+      </div>
         <div class="form-group">
-          <label for="des">Identify/Detect</label>
+          <label for="des">{{question}}</label>
           <textarea
             rows = 6
-            id="iD"
-            formControlName="iD"
+            formControlName="quest"
             class="form-control"></textarea>
-          </div>
-        </div>
-      </div>
-      <div class = "row">
-      <div class = "col-md-12">
-        <div class="form-group">
-            <label for="des">Contain/Eradicate</label>
-            <textarea
-              rows = 6
-              id="cE"
-              formControlName="cE"
-              class="form-control"></textarea>
-          </div>
-        </div>
-      </div>
-      <div class = "row">
-      <div class = "col-md-12">
-        <div class="form-group">
-            <label for="des">Recover</label>
-            <textarea
-              rows = 6
-              id="rec"
-              formControlName="rec"
-              class="form-control"></textarea>
-          </div>
-        </div>
-      </div>
-      <div class = "row">
-      <div class = "col-md-12">
-        <div class="form-group">
-            <label for="des">Follow Up</label>
-            <textarea
-              rows =6
-              id="fU"
-              formControlName="fU"
-              class="form-control"></textarea>
           </div>
         </div>
       </div>

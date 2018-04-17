@@ -20,23 +20,22 @@ export class ResponseComponent implements OnInit {
   private respon: Responses;
 
   ngOnInit() {
-    this.route.params
+    /*this.route.params
       .subscribe(
         (params: Params) => {
           this.responseId = +params['rid'];
           console.log(this.responseId );
 
         }
-      );
+      );*/
 
-      this.responseService.getResponse(this.responseId)
+    /*  this.responseService.getResponse(this.responseId)
               .subscribe(result => {
                     //console.log(result);
                     this.respon = result;
                     console.log(this.respon);
               });
-      //this.respon = this.responseService.getResponse(this.responseId);
-      //console.log(this.respon);
-  }
 
+}*/
+}
 }

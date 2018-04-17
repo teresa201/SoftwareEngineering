@@ -19,7 +19,7 @@ export class ResponseService {
                 return this.responses;
             });}
 
-  getResponse(id: number): Observable<Responses>{
+  /*getResponse(id: number): Observable<Responses>{
             return this.http.get('/api/response/' + id, JSON.stringify({}))
               .map((response: Response) => {
                   this.r = response.json().respon;
@@ -27,5 +27,5 @@ export class ResponseService {
                   return this.r;
               });
             }
-
+*/
 }

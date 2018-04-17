@@ -1,6 +1,4 @@
-export class Scenario{
-
-  s: string;
+export class Next{
   question: string;
   options: string[];
   finished: boolean;

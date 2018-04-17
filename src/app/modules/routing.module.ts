@@ -10,7 +10,7 @@ const appRoutes: Routes = [
   { path: '', redirectTo: '/home', pathMatch: 'full'},
   { path: 'home', component: HomeComponent},
   { path: 'scenario', component: ScenarioComponent },
-  { path: 'response/:rid', component: ResponseComponent },
+  { path: 'response', component: ResponseComponent },
 
 
 
