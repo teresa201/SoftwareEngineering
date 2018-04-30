@@ -1,14 +1,27 @@
 .card {
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
-    max-width: 50%;
-    height: 100%;
+    max-width: 75%;
+    height: 80%;
     margin: auto;
-    text-align: center;
+    /*text-align: center;*/
 }
-h1{
+/*h1{
   color: #191970;
+}*/
+
+#r{
+  text-align: center;
 }
-h4{
+button{
+    max-width: 80%;
+    margin: auto;
+    color: white;
+}
+
+a{
+  textDecoration: 'none';
+}
+/*div{
   border: 2px solid ;
   border-style: solid;
-}
+}*/

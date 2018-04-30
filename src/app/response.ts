@@ -1,6 +1,7 @@
 export class Responses{
 
-  dDwn: number;
+  //dDwn: number;
   question: string;
-  
+  answer: any;
+  optionChosen: string;
 }

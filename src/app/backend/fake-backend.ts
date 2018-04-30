@@ -6,7 +6,7 @@ import { Next } from '../nextSteps';
 import { Assets } from '../assets';
 import { nSDB } from './nextSteps-db';
 import { scDB } from './scenario-db';
-import { rDB } from './response-db';
+//import { rDB } from './response-db';
 import { serviceDB } from './service-db';
 //import { assetsDB } from './assetsChosen-db';
 export function fakeBackendFactory(backend: MockBackend, options: BaseRequestOptions) {
@@ -15,7 +15,7 @@ export function fakeBackendFactory(backend: MockBackend, options: BaseRequestOpt
 
         let services: String[] = JSON.parse(localStorage.getItem('services')) || serviceDB;
         let scenarios: Scenario[] = JSON.parse(localStorage.getItem('scenarios')) || scDB;
-        let responses: Responses[] = JSON.parse(localStorage.getItem('responses')) || rDB;
+      //  let responses: Responses[] = JSON.parse(localStorage.getItem('responses')) || rDB;
         let nextSteps: Next[] = JSON.parse(localStorage.getItem('nextSteps')) || nSDB;
       //  let assets: Assets[] = JSON.parse(localStorage.getItem('assets')) || assetsDB;
         let index = 0;
@@ -71,7 +71,7 @@ export function fakeBackendFactory(backend: MockBackend, options: BaseRequestOpt
       }
 
         // add Response
-        if (connection.request.url.endsWith('/api/addResponse') &&
+  /*      if (connection.request.url.endsWith('/api/addResponse') &&
           connection.request.method === RequestMethod.Post) {
             let receivedResponse= JSON.parse(connection.request.getBody());
             console.log(receivedResponse);
@@ -83,7 +83,7 @@ export function fakeBackendFactory(backend: MockBackend, options: BaseRequestOpt
               status: 200,
               body: {responsez: rDB }
        })));
-     }
+     }*/
 
        //add Assets Chosen
       /* if (connection.request.url.endsWith('/api/addAssets') &&

@@ -1,13 +1,11 @@
-
+<br>
+<br>
 <div class = "container">
-
     <h1 class = "text-center"> CyberSim</h1>
     <form *ngIf = "myOptionsF" [formGroup] = "form" (ngSubmit) = "onSubmit()">
     <p> What asset(s) do you have: </p>
 
-    <!--<select multiple formControlName = "sChosen" ngModel>
-      <option *ngFor= "let s of services" [ngValue] = "s" >{{s}}</option>
-    </select>-->
+  
     <ss-multiselect-dropdown [options]="myOptions"
                   formControlName="sChosen">
     </ss-multiselect-dropdown>

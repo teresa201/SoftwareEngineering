@@ -35,6 +35,7 @@ export class ScenarioComponent implements OnInit {
   a3: number;
   a4: number;
   middle: any;
+  responses: Responses[] = [];
 
 
   ngOnInit() {
@@ -71,6 +72,7 @@ export class ScenarioComponent implements OnInit {
 
     //generate scenario, generate function round 2 -->coorsponds with scenario(choices, text) in js
     this.scenario = generator.generate(this.options, " ").text;
+    localStorage.setItem('scenario', JSON.stringify(this.scenario));
     console.log(this.scenario);
 
     //generate default begining questions--> coorsponds with action() in js
@@ -108,6 +110,19 @@ export class ScenarioComponent implements OnInit {
       //get form values
       let dDwn = this.form.value['dDown'];
       let questionAns = this.form.value['quest'];
+
+      //update array of results
+     const rToQ = {
+     question: this.question,
+     answer: questionAns,
+     optionChosen: dDwn
+    }
+
+    this.responses.push(rToQ);
+    console.log(this.responses);
+
+
+
       if(this.middle.end != true){
       //equate dropdown picked to index
       for(var k = 0; k < this.dropdown.length; k ++){
@@ -121,6 +136,8 @@ export class ScenarioComponent implements OnInit {
     //if get a response of end = true this is the last question
     if(this.middle.end == true){
       this.display = false;
+      //send responses to local localStorage
+      localStorage.setItem('responses', JSON.stringify(this.responses));
       this.form.reset();
       this.router.navigateByUrl('response');
     }
@@ -144,6 +161,7 @@ export class ScenarioComponent implements OnInit {
       }
       if(this.middle.end == true){
           this.display = false;
+          localStorage.setItem('responses', JSON.stringify(this.responses));
           this.form.reset();
           this.router.navigateByUrl('response');
         }
