@@ -17,9 +17,11 @@ export class ResponseComponent implements OnInit {
   private responseService: ResponseService) { }
 
   private responseId: number;
-  private respon: Responses;
-
+  private responses: Responses[];
+  private scenario: string;
   ngOnInit() {
+    this.responses = JSON.parse(localStorage.getItem('responses'));
+    this.scenario = JSON.parse(localStorage.getItem('scenario'));
     /*this.route.params
       .subscribe(
         (params: Params) => {

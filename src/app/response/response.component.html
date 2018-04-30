@@ -1,15 +1,35 @@
-
+<br>
+<br>
 <div class="card">
   <div class="card-body">
-    <h1> Report:</h1>
-
-    <h2> Your Score </h2>
-      <h3>NumberNumber</h3>
-
-      <br>
-      <h3>Your Responses</h3>
-      <h4>Insert Data here</h4>
-      <br>
-      
+    <h5 class="card-title" id = "r">Scenario</h5>
+  <p class="card-text">  {{scenario}} </p>
   </div>
 </div>
+<br>
+<br>
+<div class="card" >
+  <div class="card-body">
+      <h5 class="card-title" id = "r">Response</h5>
+  </div>
+</div>
+    <div *ngFor = "let s of responses">
+      <div class="card">
+        <div class="card-body">
+        <p class="card-text">  Question: {{s.question}}</p>
+        <p *ngIf = "s.optionChosen"class="card-text">  Option Chosen: {{s.optionChosen}}</p>
+        <p class="card-text">  Your Answer: {{s.answer}}</p>
+        </div>
+      </div>
+   </div>
+   <div class = "container mt-3">
+<div class = "row">
+  <div class= "col-md-12">
+    <button class="btn btn-dark btn-block mt-4">
+      <a routerLink = "" routerLinkActive = "active"> Start New Scenario</a>
+    </button>
+  </div>
+</div>
+</div>
+<br>
+<br>
