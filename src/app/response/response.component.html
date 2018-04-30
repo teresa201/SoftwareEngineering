@@ -1,5 +1,6 @@
 <br>
 <br>
+<div id = "content" #content>
 <div class="card">
   <div class="card-body">
     <h5 class="card-title" id = "r">Scenario</h5>
@@ -22,14 +23,19 @@
         </div>
       </div>
    </div>
-   <div class = "container mt-3">
+ </div>
+<div class = "container mt-3">
 <div class = "row">
   <div class= "col-md-12">
-    <button class="btn btn-dark btn-block mt-4">
-      <a routerLink = "" routerLinkActive = "active"> Start New Scenario</a>
-    </button>
+      <button class="btn btn-dark btn-block" (click) = "downloadPDF()"> Export to PDF </button>
+      <a routerLink = "/home" routerLinkActive = "active">
+        <button class="btn btn-dark btn-block mt-4"> Start New Scenario</button>
+      </a>
+
+
   </div>
 </div>
 </div>
+
 <br>
 <br>

@@ -1,10 +1,11 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef} from '@angular/core';
 import { ActivatedRoute, Params, Router } from '@angular/router';
 import { Scenario } from '../scenario';
 import { Responses } from '../response';
 import { GeneratorService } from '../services/generator-service';
 import { ResponseService } from '../services/response.service';
 import { NgForm,FormControl, NgModel, FormGroup, FormBuilder,Validators } from '@angular/forms';
+import * as jsPDF from 'jspdf';
 
 @Component({
   selector: 'app-response',
@@ -19,25 +20,28 @@ export class ResponseComponent implements OnInit {
   private responseId: number;
   private responses: Responses[];
   private scenario: string;
+
+  @ViewChild('content') content: ElementRef;
   ngOnInit() {
     this.responses = JSON.parse(localStorage.getItem('responses'));
     this.scenario = JSON.parse(localStorage.getItem('scenario'));
-    /*this.route.params
-      .subscribe(
-        (params: Params) => {
-          this.responseId = +params['rid'];
-          console.log(this.responseId );
+  }
 
-        }
-      );*/
+  downloadPDF(){
+    let doc = new jsPDF();
+    let specialElementHandlers = {
+      '#editor': function(element, renderer){
+        return true;
+      }
+    };
 
-    /*  this.responseService.getResponse(this.responseId)
-              .subscribe(result => {
-                    //console.log(result);
-                    this.respon = result;
-                    console.log(this.respon);
-              });
+    let content = this.content.nativeElement;
 
-}*/
-}
+    doc.fromHTML(content.innerHTML, 15, 15, {
+      'width' : 190,
+      'elementHandlers' : specialElementHandlers
+    });
+
+    doc.save('report.pdf');
+  }
 }

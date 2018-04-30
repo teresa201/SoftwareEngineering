@@ -8,10 +8,14 @@ let choice=function(list)
 }
 
 class Test{
-
+  
+reset(){
+  this.index = 0
+}
 //gate is a map through the execution sequence
 constructor()
 {
+  console.log("In constructor");
   this.index = 0
   this.gate = [this.setup, this.scenario, this.action, this.informer, this.damages, this.usual, this.restart, this.responsibility, this.followup,
   this.policy, this.govt, this.ransom, this.internal, this.impact]
