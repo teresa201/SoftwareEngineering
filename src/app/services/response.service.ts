@@ -2,12 +2,15 @@ import { Injectable } from '@angular/core';
 import { Http, Headers, Response } from '@angular/http';
 import { Observable } from 'rxjs';
 import { Responses } from '../response';
+import { Assets } from '../assets';
 import 'rxjs/add/operator/map';
 
 @Injectable()
 export class ResponseService {
   private responses : Responses[];
+  private assetsCh : Assets[];
   private r : Responses;
+  private a : number[];
   constructor(private http: Http) {
 
   }
@@ -19,13 +22,21 @@ export class ResponseService {
                 return this.responses;
             });}
 
-  /*getResponse(id: number): Observable<Responses>{
-            return this.http.get('/api/response/' + id, JSON.stringify({}))
+/*  addAssetsChosen(assets: Assets): Observable<Assets[]> {
+
+              return this.http.post('/api/addAssets', assets)
               .map((response: Response) => {
-                  this.r = response.json().respon;
-                  console.log(this.r);
-                  return this.r;
+                    this.assetsCh = response.json().assets;
+                    return this.assetsCh;
+                });}
+
+  getAssetsChosen(id: number): Observable<number[]>{
+            return this.http.get('/api/assets/' + id, JSON.stringify({}))
+              .map((response: Response) => {
+                  this.a = response.json().respon;
+                  console.log(this.a);
+                  return this.a;
               });
-            }
-*/
+            }*/
+
 }

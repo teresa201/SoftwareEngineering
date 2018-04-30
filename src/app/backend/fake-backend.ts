@@ -3,10 +3,12 @@ import { MockBackend, MockConnection } from '@angular/http/testing';
 import { Scenario } from '../scenario';
 import { Responses } from '../response';
 import { Next } from '../nextSteps';
+import { Assets } from '../assets';
 import { nSDB } from './nextSteps-db';
 import { scDB } from './scenario-db';
 import { rDB } from './response-db';
 import { serviceDB } from './service-db';
+//import { assetsDB } from './assetsChosen-db';
 export function fakeBackendFactory(backend: MockBackend, options: BaseRequestOptions) {
     // configure fake backend
     backend.connections.subscribe((connection: MockConnection) => {
@@ -15,6 +17,8 @@ export function fakeBackendFactory(backend: MockBackend, options: BaseRequestOpt
         let scenarios: Scenario[] = JSON.parse(localStorage.getItem('scenarios')) || scDB;
         let responses: Responses[] = JSON.parse(localStorage.getItem('responses')) || rDB;
         let nextSteps: Next[] = JSON.parse(localStorage.getItem('nextSteps')) || nSDB;
+      //  let assets: Assets[] = JSON.parse(localStorage.getItem('assets')) || assetsDB;
+        let index = 0;
         // wrap in timeout to simulate server api call
         setTimeout(() => {
 
@@ -79,13 +83,31 @@ export function fakeBackendFactory(backend: MockBackend, options: BaseRequestOpt
               status: 200,
               body: {responsez: rDB }
        })));
-     return;
-      }
+     }
 
-      // API: To get response with specific id
-    /*    if (connection.request.url.match(/\/api\/response\/\d+$/) && connection.request.method === RequestMethod.Get) {
+       //add Assets Chosen
+      /* if (connection.request.url.endsWith('/api/addAssets') &&
+         connection.request.method === RequestMethod.Post) {
+           console.log("MADEIT");
+           let receivedAsset= JSON.parse(connection.request.getBody());
+           //console.log("MADEIT");
+
+           assets.push(receivedAsset);
+           localStorage.setItem('assets', JSON.stringify(assets));
+           console.log(assets);
+
+           connection.mockRespond(new Response(new ResponseOptions({
+             status: 200,
+             body: {assets: assetsDB }
+      })));
+     return;
+   }*/
+
+
+      // API: To get assetsChosen with specific id
+       /*if (connection.request.url.match(/\/api\/assets\/\d+$/) && connection.request.method === RequestMethod.Get) {
         /*  if (connection.request.headers.get('Authorization') === 'Bearer fake-jwt-token') {*/
-      /*   if(!rDB){
+        /* if(!rDB){
               console.log("bad");
                 connection.mockRespond(new Response(
                     new ResponseOptions({ status: 400 })
@@ -95,15 +117,15 @@ export function fakeBackendFactory(backend: MockBackend, options: BaseRequestOpt
                 //console.log("edit");
                 let urlParts = connection.request.url.split('/');
                 let id = parseInt(urlParts[urlParts.length-1]);
-                console.log(responses);
-                let matchedRes = responses.filter(response => {return response.responseId === id;});
+                console.log(assets);
+                let matchedRes = assets.filter(asset => {return asset.id === id;});
                 console.log(matchedRes);
                 let response = matchedRes.length ? matchedRes[0] : null;
 
               console.log(response);
                 //respond with listings that match the project ID
                 connection.mockRespond(new Response(
-                    new ResponseOptions({ status: 200, body: {respon: response}})
+                    new ResponseOptions({ status: 200, body: {respon: response.aChosen}})
                 ));
         }
       }*/

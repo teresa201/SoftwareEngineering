@@ -6,6 +6,7 @@ import { GeneratorService } from '../services/generator-service';
 import { ResponseService } from '../services/response.service';
 import { NgForm,FormControl, NgModel, FormGroup, FormBuilder,Validators } from '@angular/forms';
 import { Next } from '../nextSteps';
+import { generator } from '../generator';
 @Component({
   selector: 'app-scenario',
   templateUrl: './scenario.component.html',
@@ -20,30 +21,70 @@ export class ScenarioComponent implements OnInit {
   private scenarioId : number;
   private scen: Scenario;
   drop: boolean = false;
+  display: boolean = true;
   question: string ;
-  options: String[];
+  options: number[] = [];
+  dropdown: string[];
   scenario: string;
   form: FormGroup;
   finished: boolean;
   private next: Next;
+  a0: number;
+  a1: number;
+  a2: number;
+  a3: number;
+  a4: number;
+  middle: any;
 
 
   ngOnInit() {
-  
-    console.log("Iin Scenario");
-      this.generatorService.getScenario()
-              .subscribe(result => {
-                    //console.log(result);
-                    this.scen = result;
-                    if(this.scen.options.length > 0){
-                      this.drop = true;
-                    }
-                    this.scenario = this.scen.s;
-                    this.question = this.scen.question;
-                    this.options = this.scen.options;
-                    this.finished = this.scen.finished;
-                    console.log(this.scen);
-              });
+    //extract Id of Assets Chosen
+    console.log("In Scenario");
+    this.route.params
+      .subscribe(
+        (params: Params) => {
+          this.a0 = +params['id'];
+          this.a1 = +params['id1'];
+          this.a2 = +params['id2'];
+          this.a3 = +params['id3'];
+          this.a4 = +params['id4'];
+        }
+      );
+
+
+    //get Assets Chosen Array
+    if(this.a0 != 0){
+      this.options.push(this.a0);
+    }
+    if(this.a1 != 0){
+      this.options.push(this.a1);
+    }
+    if(this.a2 != 0){
+      this.options.push(this.a2);
+    }
+    if(this.a3 != 0){
+      this.options.push(this.a3);
+    }
+    if(this.a4 != 0){
+      this.options.push(this.a4);
+    }
+
+    //generate scenario, generate function round 2 -->coorsponds with scenario(choices, text) in js
+    this.scenario = generator.generate(this.options, " ").text;
+    console.log(this.scenario);
+
+    //generate default begining questions--> coorsponds with action() in js
+    this.middle = generator.generate();
+    console.log(this.middle);
+    this.question = this.middle.text;
+    console.log(this.question);
+    this.dropdown = this.middle.list;
+    console.log(this.dropdown);
+    console.log(this.middle.end);
+    if(this.dropdown.length > 0){
+      this.drop = true;
+    }
+
   this.initForm();
 
   }
@@ -60,36 +101,56 @@ export class ScenarioComponent implements OnInit {
   }
 
   onSubmit(){
+
     console.log(this.form.value);
+      let dDwnAns: number[] = [];
 
-    const newResponse = {
-      dDwn: this.form.value['dDown'],
-      question: this.form.value['quest']
-
+      //get form values
+      let dDwn = this.form.value['dDown'];
+      let questionAns = this.form.value['quest'];
+      if(this.middle.end != true){
+      //equate dropdown picked to index
+      for(var k = 0; k < this.dropdown.length; k ++){
+          if(this.dropdown[k] == dDwn){
+            dDwnAns.push(k);
+            break;
+          }
+      }
+      console.log(dDwnAns);
     }
-
-      this.responseService.addResponse(newResponse);
-    if(this.finished){
+    //if get a response of end = true this is the last question
+    if(this.middle.end == true){
+      this.display = false;
       this.form.reset();
       this.router.navigateByUrl('response');
     }
+    //get the next set of question and response
     else{
+      //turn back ot false before grabbing next part
       this.drop = false;
-      this.generatorService.getNext()
-              .subscribe(result => {
-                    console.log(result);
-                    this.next = result;
-                    if(this.next.options.length > 0){
-                      this.drop = true;
-                    }
-                    this.question = this.next.question;
-                    this.options = this.next.options;
-                    this.finished = this.next.finished;
 
-              });
+      //get next question should equate to one of the next 11 possible rounds
+      this.middle = generator.generate(dDwnAns);
+      console.log(this.middle);
+      this.question = this.middle.text;
+      console.log(this.question);
+      this.dropdown = this.middle.list;
+      console.log(this.dropdown);
+      console.log(this.middle.end);
+      if(this.middle.end != true){
+      if(this.dropdown.length > 0){
+        this.drop = true;
+        }
+      }
+      if(this.middle.end == true){
+          this.display = false;
+          this.form.reset();
+          this.router.navigateByUrl('response');
+        }
+      }
     this.form.reset();
-    }
-
   }
 
 }
+
+//}
