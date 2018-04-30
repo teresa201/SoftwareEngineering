@@ -5,3 +5,10 @@
     margin: auto;
     text-align: center;
 }
+
+div{
+  text-align: left;
+}
+.label{
+  text-align: left;
+}

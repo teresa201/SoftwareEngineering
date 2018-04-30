@@ -160,6 +160,7 @@ export class ScenarioComponent implements OnInit {
         }
       }
       if(this.middle.end == true){
+          generator.reset();
           this.display = false;
           localStorage.setItem('responses', JSON.stringify(this.responses));
           this.form.reset();

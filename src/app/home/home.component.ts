@@ -44,6 +44,7 @@ export class HomeComponent implements OnInit {
    //gets services from the javascript file using setup method
    //populates generator
   // this.services = generator.setup().list;
+    //console.log()
     this.services = generator.generate().list; //coorsponds to callin setup in js
     console.log(this.services);
     for(let itm of this.services){
