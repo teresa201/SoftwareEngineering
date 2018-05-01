@@ -54,20 +54,20 @@ export class ScenarioComponent implements OnInit {
 
 
     //get Assets Chosen Array
-    if(this.a0 != 0){
-      this.options.push(this.a0);
+    if(this.a0 == 0){
+      this.options.push(0);
     }
-    if(this.a1 != 0){
-      this.options.push(this.a1);
+    if(this.a1 == 0){
+      this.options.push(1);
     }
-    if(this.a2 != 0){
-      this.options.push(this.a2);
+    if(this.a2 == 0){
+      this.options.push(2);
     }
-    if(this.a3 != 0){
-      this.options.push(this.a3);
+    if(this.a3 == 0){
+      this.options.push(3);
     }
-    if(this.a4 != 0){
-      this.options.push(this.a4);
+    if(this.a4 == 0){
+      this.options.push(4);
     }
 
     //generate scenario, generate function round 2 -->coorsponds with scenario(choices, text) in js

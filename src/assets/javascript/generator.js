@@ -8,7 +8,7 @@ let choice=function(list)
 }
 
 class Test{
-  
+
 reset(){
   this.index = 0
 }
@@ -46,7 +46,7 @@ setup()
 //generate scenario based on choices in assetList
 scenario(choices, text)
 {
-
+  console.log(choices);
   //HAVE FRONTEND SEND ALL UNCHECKED BOXES
   for(let value in choices)
     this.assetList[choices[value]] = ''
@@ -127,11 +127,11 @@ restart()
 
 responsibility(){
   if(choice([0, 1]))
-    return {list:[], text:'Who is responsible for fixing this issue? Do they know?'}
+    return {list:['Yes', 'No'], text:'Who is responsible for fixing this issue? Do they know?'}
   else
   {
   this.time = true;
-  return {list:['Yes', 'No'], text:'How long can our company sustain this state before it encounters serious losses, monetarily or otherwise? What kinds of losses will the company experience?'}
+  return {list:['No time', 'A few hours', 'A day', 'A few days', 'A month or more', 'A year or more', 'Indefinitely'], text:'How long can our company sustain this state before it encounters serious losses, monetarily or otherwise? What kinds of losses will the company experience?'}
   //Time Range
   }
 
